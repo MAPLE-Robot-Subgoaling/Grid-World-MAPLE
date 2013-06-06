@@ -74,7 +74,25 @@ public class Graph {
 		nodes.get(1).neighbors.put(nodes.get(0), Math.random() * 12);
 		nodes.get(1).neighbors.put(nodes.get(2), Math.random() * 12);
 		nodes.get(1).neighbors.put(nodes.get(4), Math.random() * 12);
-		
+		nodes.get(2).neighbors.put(nodes.get(1), Math.random() * 12);
+		nodes.get(2).neighbors.put(nodes.get(5), Math.random() * 12);
+		nodes.get(3).neighbors.put(nodes.get(0), Math.random() * 12);
+		nodes.get(3).neighbors.put(nodes.get(4), Math.random() * 12);
+		nodes.get(3).neighbors.put(nodes.get(6), Math.random() * 12);
+		nodes.get(4).neighbors.put(nodes.get(1), Math.random() * 12);
+		nodes.get(4).neighbors.put(nodes.get(3), Math.random() * 12);
+		nodes.get(4).neighbors.put(nodes.get(5), Math.random() * 12);
+		nodes.get(4).neighbors.put(nodes.get(7), Math.random() * 12);
+		nodes.get(5).neighbors.put(nodes.get(2), Math.random() * 12);
+		nodes.get(5).neighbors.put(nodes.get(4), Math.random() * 12);
+		nodes.get(5).neighbors.put(nodes.get(8), Math.random() * 12);
+		nodes.get(6).neighbors.put(nodes.get(3), Math.random() * 12);
+		nodes.get(6).neighbors.put(nodes.get(7), Math.random() * 12);
+		nodes.get(7).neighbors.put(nodes.get(4), Math.random() * 12);
+		nodes.get(7).neighbors.put(nodes.get(6), Math.random() * 12);
+		nodes.get(7).neighbors.put(nodes.get(8), Math.random() * 12);
+		nodes.get(8).neighbors.put(nodes.get(5), Math.random() * 12);
+		nodes.get(8).neighbors.put(nodes.get(7), Math.random() * 12);
 	}
 	
 	/**
