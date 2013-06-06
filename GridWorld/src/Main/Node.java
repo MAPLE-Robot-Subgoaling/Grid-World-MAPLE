@@ -16,7 +16,7 @@ import java.util.*;
 public class Node {
 	
 	private String Name;
-	
+	private boolean here;
 	public Node(){
 		
 	}
