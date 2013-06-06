@@ -19,8 +19,10 @@ public class Node {
 	private boolean here;
 	//hjggfghdhgsd
 	private int idshfj;
+
 	public Node(){
 		
+		Name = "sas";
 	}
 	
 }
