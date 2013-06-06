@@ -17,6 +17,7 @@ public class Node {
 	
 	private String Name;
 	private boolean here;
+	//hjg
 	public Node(){
 		
 	}
