@@ -21,7 +21,28 @@ public class Graph {
 		/*
 		 * 9 different nodes - hand coded?
 		 * call setNeighbors()
+		 * Add the nodes to the array list
 		 */
+		Node s0 = new Node();
+		nodes.add(s0);
+		Node s1 = new Node();
+		nodes.add(s1);
+		Node s2 = new Node();
+		nodes.add(s2);
+		Node s3 = new Node();
+		nodes.add(s3);
+		Node s4 = new Node();
+		nodes.add(s4);
+		Node s5 = new Node();
+		nodes.add(s5);
+		Node s6 = new Node();
+		nodes.add(s6);
+		Node s7 = new Node();
+		nodes.add(s7);
+		Node s8 = new Node();
+		nodes.add(s8);
+		setNeighbors();
+		
 	}
 	
 	/**
@@ -41,12 +62,19 @@ public class Graph {
 	 * setNeighbors() - sets up the neighborhood of all the
 	 * node elements
 	 */
-	public void setNeighbors(){
+	private void setNeighbors(){
 		/*
 		 * 	for each node in nodes
 		 * 		add HashMap entries of neighboring Nodes and their corresponding Q-Values
 		 * 			note: could add random number generator for the random numbers.
 		 */
+		
+		nodes.get(0).neighbors.put(nodes.get(1), Math.random() * 12);
+		nodes.get(0).neighbors.put(nodes.get(3), Math.random() * 12);
+		nodes.get(1).neighbors.put(nodes.get(0), Math.random() * 12);
+		nodes.get(1).neighbors.put(nodes.get(2), Math.random() * 12);
+		nodes.get(1).neighbors.put(nodes.get(4), Math.random() * 12);
+		
 	}
 	
 	/**

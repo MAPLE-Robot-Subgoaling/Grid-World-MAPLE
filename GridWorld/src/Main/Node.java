@@ -14,7 +14,7 @@ import java.util.*;
 
 public class Node {
 	
-	private HashMap Neighbors;
+	protected HashMap neighbors;
 	private boolean isHere;
 	private boolean isGoal;
 
@@ -27,7 +27,7 @@ public class Node {
 	}
 
 	public HashMap getNeighbors() {
-		return Neighbors;
+		return neighbors;
 	}
 
 	public boolean isHere() {
