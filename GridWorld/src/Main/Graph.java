@@ -23,23 +23,23 @@ public class Graph {
 		 * call setNeighbors()
 		 * Add the nodes to the array list
 		 */
-		Node s0 = new Node();
+		Node s0 = new Node("s0");
 		nodes.add(s0);
-		Node s1 = new Node();
+		Node s1 = new Node("s1");
 		nodes.add(s1);
-		Node s2 = new Node();
+		Node s2 = new Node("s2");
 		nodes.add(s2);
-		Node s3 = new Node();
+		Node s3 = new Node("s3");
 		nodes.add(s3);
-		Node s4 = new Node();
+		Node s4 = new Node("s4");
 		nodes.add(s4);
-		Node s5 = new Node();
+		Node s5 = new Node("s5");
 		nodes.add(s5);
-		Node s6 = new Node();
+		Node s6 = new Node("s6");
 		nodes.add(s6);
-		Node s7 = new Node();
+		Node s7 = new Node("s7");
 		nodes.add(s7);
-		Node s8 = new Node();
+		Node s8 = new Node("s8");
 		nodes.add(s8);
 		setNeighbors();
 		
@@ -68,7 +68,7 @@ public class Graph {
 		 * 		add HashMap entries of neighboring Nodes and their corresponding Q-Values
 		 * 			note: could add random number generator for the random numbers.
 		 */
-		
+
 		nodes.get(0).neighbors.put(nodes.get(1), Math.random() * 12);
 		nodes.get(0).neighbors.put(nodes.get(3), Math.random() * 12);
 		nodes.get(1).neighbors.put(nodes.get(0), Math.random() * 12);

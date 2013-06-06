@@ -14,19 +14,21 @@ import java.util.*;
 
 public class Node {
 	
-	protected HashMap neighbors;
+	protected HashMap<Node, Double> neighbors = new HashMap<Node, Double>();
+	private String name;
 	private boolean isHere;
 	private boolean isGoal;
 
 	//Constructor: initializes a node and the variables isHere and isGoal to false
-	public Node(){
+	public Node(String name){
 		
+		this.name = name;
 		isHere = false;
 		isGoal = false;
 		
 	}
 
-	public HashMap getNeighbors() {
+	public HashMap<Node, Double> getNeighbors() {
 		return neighbors;
 	}
 
@@ -44,6 +46,20 @@ public class Node {
 
 	public void setGoal(boolean isGoal) {
 		this.isGoal = isGoal;
+	}
+	
+	/**
+	 * toString() - returns the toString of the entire Graph
+	 * @return - tostring of the entire graph
+	 */
+	public String toString(){
+		
+		String nodeInfo = new String();
+		
+		nodeInfo += "The current state you are at is " + this.name ;
+		
+		
+		return nodeInfo;
 	}
 	
 }
