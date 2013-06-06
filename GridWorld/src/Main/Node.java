@@ -15,10 +15,7 @@ import java.util.*;
 
 public class Node {
 	
-	private String Name;
-	private boolean here;
-	//hjggfghdhgsd
-	private int idshfj;
+	private HashMap dhfs;
 
 	public Node(){
 		
