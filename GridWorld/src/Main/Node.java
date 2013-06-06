@@ -22,7 +22,6 @@ public class Node {
 
 	public Node(){
 		
-		Name = "sas";
 	}
 	
 }
