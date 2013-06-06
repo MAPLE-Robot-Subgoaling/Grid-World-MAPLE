@@ -8,18 +8,42 @@ import java.util.*;
  * Class Details:
  * 	This class is designed to contain the Node for the Graph ADT
  * Attributes:
- * 	Name - Name of the Node
  * 	Neighbors - HashMap of all neighbors for that particular 
  * 	object and corresponding edge weights (Q-values)
  */
 
 public class Node {
 	
-	private HashMap dhfs;
-	private boolean ishere;
+	private HashMap Neighbors;
+	private boolean isHere;
+	private boolean isGoal;
 
+	//Constructor: initializes a node and the variables isHere and isGoal to false
 	public Node(){
 		
+		isHere = false;
+		isGoal = false;
+		
+	}
+
+	public HashMap getNeighbors() {
+		return Neighbors;
+	}
+
+	public boolean isHere() {
+		return isHere;
+	}
+
+	public void setHere(boolean isHere) {
+		this.isHere = isHere;
+	}
+
+	public boolean isGoal() {
+		return isGoal;
+	}
+
+	public void setGoal(boolean isGoal) {
+		this.isGoal = isGoal;
 	}
 	
 }
