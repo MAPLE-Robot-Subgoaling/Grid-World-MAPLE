@@ -17,7 +17,8 @@ public class Node {
 	
 	private String Name;
 	private boolean here;
-	//hjg
+	//hjggfghdhgsd
+	private int idshfj;
 	public Node(){
 		
 	}
