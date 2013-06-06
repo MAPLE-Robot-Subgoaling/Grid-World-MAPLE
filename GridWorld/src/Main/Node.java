@@ -16,6 +16,7 @@ import java.util.*;
 public class Node {
 	
 	private HashMap dhfs;
+	private boolean ishere;
 
 	public Node(){
 		
