@@ -151,7 +151,14 @@ public class Graph {
 	 * @return - index of the agent's locations
 	 */
 	public int findAgent(){
-		return 0;
+		int index = -3;
+		for(int i = 0; i < nodes.size(); i++){
+			if(nodes.get(i).isHere()){
+				index = i;
+			}
+		}
+		
+		return index;
 	}
 	
 	/**
