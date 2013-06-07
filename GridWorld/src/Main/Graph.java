@@ -60,7 +60,6 @@ public class Graph {
 		
 		nodes.get(index).neighbors.entrySet();
 		Node temp = nodes.get(index);
-		System.out.println(temp.neighbors);
 		TreeSet<Double> val = new TreeSet<Double>(); //Sorts them automatically :)
 		
 		//Creates the list of values for that node
@@ -78,11 +77,14 @@ public class Graph {
 		
 		if(nextStep == null){
 			System.out.println("Step Unsuccessful"); //Big Problem!
-		}else{
-			System.out.println("Node Found!"); 
+		}else{ 
 			int newIndex = nodes.indexOf(nextStep);
-			System.out.println("Old Index: " + index + " and object: " + nodes.get(index).toString());
-			System.out.println("New Index: " + newIndex + " and object: " + nodes.get(newIndex).toString());
+			nodes.get(index).setHere(false);
+			nodes.get(newIndex).setHere(true); //Moves the Agent
+			
+
+			System.out.print("Agent Moved from Here " + nodes.get(index).toString());
+			System.out.println(" to Here" + nodes.get(newIndex).toString());
 		}
 		
 	}
@@ -143,7 +145,7 @@ public class Graph {
 	 * @return - true or false
 	 */
 	public boolean isWinner(int index){
-		return true;
+		return nodes.get(index).isHere() && nodes.get(index).isGoal();
 	}
 	
 	/**
@@ -151,7 +153,11 @@ public class Graph {
 	 * @return - index of the agent's locations
 	 */
 	public int findAgent(){
-		return 0;
+		for(int i = 0; i < nodes.size(); i++){
+			if(nodes.get(i).isHere())
+				return i;
+		}
+		return -1;
 	}
 	
 	/**

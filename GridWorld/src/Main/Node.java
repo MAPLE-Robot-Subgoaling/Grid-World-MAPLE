@@ -62,11 +62,7 @@ public class Node {
 	 */
 	public String toString(){
 		
-		String nodeInfo = new String();
-		
-		nodeInfo += "The current state you are looking at is " + this.name;
-		
-		return nodeInfo;
+		return name;
 	}
 	
 }
