@@ -14,7 +14,7 @@ import java.util.*;
 
 public class Node {
 	
-	protected HashMap<Node, Double> neighbors = new HashMap<Node, Double>();
+	protected HashMap<Node, Double> neighbors;
 	private String name;
 	private boolean isHere;
 	private boolean isGoal;
@@ -25,7 +25,15 @@ public class Node {
 		this.name = name;
 		isHere = false;
 		isGoal = false;
-		
+		neighbors = new HashMap<Node, Double>();
+	}
+	
+	//Shallow Copy Constructor
+	public Node(Node other){
+		this.name = other.name;
+		this.isGoal = other.isGoal;
+		this.isHere = other.isHere;
+		this.neighbors = other.neighbors;
 	}
 
 	public HashMap<Node, Double> getNeighbors() {

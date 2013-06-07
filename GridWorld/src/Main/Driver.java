@@ -17,6 +17,9 @@ public class Driver {
 		 * Step one:
 		 * Create the Graph Object
 		 */
+		
+		Graph enviro = new Graph();
+		enviro.move(0);
 
 		/*
 		 * Step two:

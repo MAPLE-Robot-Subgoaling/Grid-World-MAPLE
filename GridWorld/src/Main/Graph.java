@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.*;
+import java.util.Map.Entry;
 /**
  * 
  * @author Robot-Subgoaling
@@ -15,7 +16,7 @@ import java.util.*;
 
 public class Graph {
 	
-	private ArrayList<Node> nodes;
+	private ArrayList<Node> nodes = new ArrayList<Node>();
 	
 	public Graph(){
 		/*
@@ -56,6 +57,47 @@ public class Graph {
 		 * sets the agent to false in old node, and true in the new node
 		 * print out the node
 		 */
+		
+		Node temp = new Node(nodes.get(index));
+		TreeSet<Double> val = new TreeSet<Double>(); //Sorts them automatically :)
+		
+		//Creates the list of values for that node
+		Iterator<Entry<Node, Double>> itr = temp.neighbors.entrySet().iterator();
+		while(itr.hasNext()){
+			Map.Entry<Node, Double> pairs = (Map.Entry<Node, Double>)itr.next();
+			val.add(pairs.getValue());
+			itr.remove();
+		}
+		
+		Double value = val.first(); //returns the smallest double
+		
+		//Return the corresponding key
+		Node nextStep = getKeyfromVal(index , temp.neighbors , value);
+		
+		
+		if(nextStep == null){
+			System.out.println("Step Unsuccessful"); //Big Problem!
+		}else{
+			System.out.println("Node Found!"); 
+			int newIndex = nodes.indexOf(nextStep);
+			System.out.println("Old Index: " + index + " and object: " + nodes.get(index).toString());
+			System.out.println("New Index: " + newIndex + " and object: " + nodes.get(newIndex).toString());
+		}
+		
+	}
+	
+	private Node getKeyfromVal(int index, Map<Node,Double> map, Double value){
+		
+		/*
+		 * Error - returns null here for some reason.
+		 */
+		
+		Node temp = new Node(nodes.get(index));
+		for(Entry<Node, Double> entry: temp.neighbors.entrySet()){
+			if(value.equals(entry.getValue()))
+				return entry.getKey();
+		}
+		return null;
 	}
 	
 	/**
