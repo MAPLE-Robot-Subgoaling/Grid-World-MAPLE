@@ -157,22 +157,13 @@ public class Graph {
 	 * @return - index of the agent's locations
 	 */
 	public int findAgent(){
-<<<<<<< HEAD
-		int index = -3;
-		for(int i = 0; i < nodes.size(); i++){
-			if(nodes.get(i).isHere()){
-				index = i;
-			}
-		}
 		
-		return index;
-=======
 		for(int i = 0; i < nodes.size(); i++){
 			if(nodes.get(i).isHere())
 				return i;
 		}
 		return -1;
->>>>>>> origin/Tenji
+
 	}
 	
 	/**
