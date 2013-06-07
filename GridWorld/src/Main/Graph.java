@@ -42,6 +42,10 @@ public class Graph {
 		nodes.add(s7);
 		Node s8 = new Node("s8");
 		nodes.add(s8);
+		
+		//sets up the start state and the goal state 
+		nodes.get(0).setHere(true);
+		nodes.get(nodes.size() - 1).setGoal(true);
 		setNeighbors();
 		
 	}
@@ -60,7 +64,6 @@ public class Graph {
 		
 		nodes.get(index).neighbors.entrySet();
 		Node temp = nodes.get(index);
-		System.out.println(temp.neighbors);
 		TreeSet<Double> val = new TreeSet<Double>(); //Sorts them automatically :)
 		
 		//Creates the list of values for that node
@@ -78,11 +81,14 @@ public class Graph {
 		
 		if(nextStep == null){
 			System.out.println("Step Unsuccessful"); //Big Problem!
-		}else{
-			System.out.println("Node Found!"); 
+		}else{ 
 			int newIndex = nodes.indexOf(nextStep);
-			System.out.println("Old Index: " + index + " and object: " + nodes.get(index).toString());
-			System.out.println("New Index: " + newIndex + " and object: " + nodes.get(newIndex).toString());
+			nodes.get(index).setHere(false);
+			nodes.get(newIndex).setHere(true); //Moves the Agent
+			
+
+			System.out.print("Agent Moved from Here " + nodes.get(index).toString());
+			System.out.println(" to Here" + nodes.get(newIndex).toString());
 		}
 		
 	}
@@ -111,30 +117,30 @@ public class Graph {
 		 * 			note: could add random number generator for the random numbers.
 		 */
 
-		nodes.get(0).neighbors.put(nodes.get(1), Math.random() * 12);
-		nodes.get(0).neighbors.put(nodes.get(3), Math.random() * 12);
-		nodes.get(1).neighbors.put(nodes.get(0), Math.random() * 12);
-		nodes.get(1).neighbors.put(nodes.get(2), Math.random() * 12);
-		nodes.get(1).neighbors.put(nodes.get(4), Math.random() * 12);
-		nodes.get(2).neighbors.put(nodes.get(1), Math.random() * 12);
-		nodes.get(2).neighbors.put(nodes.get(5), Math.random() * 12);
-		nodes.get(3).neighbors.put(nodes.get(0), Math.random() * 12);
-		nodes.get(3).neighbors.put(nodes.get(4), Math.random() * 12);
-		nodes.get(3).neighbors.put(nodes.get(6), Math.random() * 12);
-		nodes.get(4).neighbors.put(nodes.get(1), Math.random() * 12);
-		nodes.get(4).neighbors.put(nodes.get(3), Math.random() * 12);
-		nodes.get(4).neighbors.put(nodes.get(5), Math.random() * 12);
-		nodes.get(4).neighbors.put(nodes.get(7), Math.random() * 12);
-		nodes.get(5).neighbors.put(nodes.get(2), Math.random() * 12);
-		nodes.get(5).neighbors.put(nodes.get(4), Math.random() * 12);
-		nodes.get(5).neighbors.put(nodes.get(8), Math.random() * 12);
-		nodes.get(6).neighbors.put(nodes.get(3), Math.random() * 12);
-		nodes.get(6).neighbors.put(nodes.get(7), Math.random() * 12);
-		nodes.get(7).neighbors.put(nodes.get(4), Math.random() * 12);
-		nodes.get(7).neighbors.put(nodes.get(6), Math.random() * 12);
-		nodes.get(7).neighbors.put(nodes.get(8), Math.random() * 12);
-		nodes.get(8).neighbors.put(nodes.get(5), Math.random() * 12);
-		nodes.get(8).neighbors.put(nodes.get(7), Math.random() * 12);
+		nodes.get(0).neighbors.put(nodes.get(1), 3.0);
+		nodes.get(0).neighbors.put(nodes.get(3), 1.0);
+		nodes.get(1).neighbors.put(nodes.get(0), 3.0);
+		nodes.get(1).neighbors.put(nodes.get(2), 7.0);
+		nodes.get(1).neighbors.put(nodes.get(4), 5.0);
+		nodes.get(2).neighbors.put(nodes.get(1), 7.0);
+		nodes.get(2).neighbors.put(nodes.get(5), 6.0);
+		nodes.get(3).neighbors.put(nodes.get(0), 1.0);
+		nodes.get(3).neighbors.put(nodes.get(4), 8.0);
+		nodes.get(3).neighbors.put(nodes.get(6), 0.9);
+		nodes.get(4).neighbors.put(nodes.get(1), 5.0);
+		nodes.get(4).neighbors.put(nodes.get(3), 8.0);
+		nodes.get(4).neighbors.put(nodes.get(5), 7.0);
+		nodes.get(4).neighbors.put(nodes.get(7), 6.0);
+		nodes.get(5).neighbors.put(nodes.get(2), 6.0);
+		nodes.get(5).neighbors.put(nodes.get(4), 7.0);
+		nodes.get(5).neighbors.put(nodes.get(8), 10.0);
+		nodes.get(6).neighbors.put(nodes.get(3), 0.9);
+		nodes.get(6).neighbors.put(nodes.get(7), 0.8);
+		nodes.get(7).neighbors.put(nodes.get(4), 6.0);
+		nodes.get(7).neighbors.put(nodes.get(6), 0.8);
+		nodes.get(7).neighbors.put(nodes.get(8), 0.7);
+		nodes.get(8).neighbors.put(nodes.get(5), 10.0);
+		nodes.get(8).neighbors.put(nodes.get(7), 0.7);
 	}
 	
 	/**
@@ -143,7 +149,7 @@ public class Graph {
 	 * @return - true or false
 	 */
 	public boolean isWinner(int index){
-		return true;
+		return nodes.get(index).isHere() && nodes.get(index).isGoal();
 	}
 	
 	/**
@@ -151,6 +157,7 @@ public class Graph {
 	 * @return - index of the agent's locations
 	 */
 	public int findAgent(){
+<<<<<<< HEAD
 		int index = -3;
 		for(int i = 0; i < nodes.size(); i++){
 			if(nodes.get(i).isHere()){
@@ -159,6 +166,13 @@ public class Graph {
 		}
 		
 		return index;
+=======
+		for(int i = 0; i < nodes.size(); i++){
+			if(nodes.get(i).isHere())
+				return i;
+		}
+		return -1;
+>>>>>>> origin/Tenji
 	}
 	
 	/**
