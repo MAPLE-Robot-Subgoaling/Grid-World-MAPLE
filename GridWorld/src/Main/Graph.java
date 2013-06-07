@@ -58,21 +58,22 @@ public class Graph {
 		 * print out the node
 		 */
 		
-		Node temp = new Node(nodes.get(index));
+		nodes.get(index).neighbors.entrySet();
+		Node temp = nodes.get(index);
+		System.out.println(temp.neighbors);
 		TreeSet<Double> val = new TreeSet<Double>(); //Sorts them automatically :)
 		
 		//Creates the list of values for that node
-		Iterator<Entry<Node, Double>> itr = temp.neighbors.entrySet().iterator();
+		Iterator<Entry<Node, Double>> itr = nodes.get(index).neighbors.entrySet().iterator();
 		while(itr.hasNext()){
 			Map.Entry<Node, Double> pairs = (Map.Entry<Node, Double>)itr.next();
 			val.add(pairs.getValue());
-			itr.remove();
 		}
 		
 		Double value = val.first(); //returns the smallest double
 		
 		//Return the corresponding key
-		Node nextStep = getKeyfromVal(index , temp.neighbors , value);
+		Node nextStep = getKeyfromVal(index , nodes.get(index).neighbors , value);
 		
 		
 		if(nextStep == null){
@@ -92,8 +93,7 @@ public class Graph {
 		 * Error - returns null here for some reason.
 		 */
 		
-		Node temp = new Node(nodes.get(index));
-		for(Entry<Node, Double> entry: temp.neighbors.entrySet()){
+		for(Entry<Node, Double> entry: nodes.get(index).neighbors.entrySet()){
 			if(value.equals(entry.getValue()))
 				return entry.getKey();
 		}
