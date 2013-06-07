@@ -62,7 +62,15 @@ public class Node {
 	 */
 	public String toString(){
 		
+<<<<<<< HEAD
 		return name;
+=======
+		String nodeInfo = new String();
+		
+		nodeInfo +=  this.name + "\n";
+		
+		return nodeInfo;
+>>>>>>> af21dd630e9f7d449e1d5b9ba7fb1cb990142152
 	}
 	
 }
