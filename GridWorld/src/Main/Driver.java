@@ -19,8 +19,7 @@ public class Driver {
 		 */
 		
 		Graph enviro = new Graph();
-		enviro.move(2);
-		enviro.move(1);
+		
 
 		/*
 		 * Step two:
@@ -43,6 +42,21 @@ public class Driver {
 		 *
 		 *	<-------------				
 		 */
+		for(int i = 0; i < 10; i++){
+			int currentLocation = enviro.findAgent();
+			if(enviro.isWinner(currentLocation)){
+				System.out.println("Simulation Over");
+				System.out.println("Agent Located at: " + enviro.printNode(currentLocation));
+				break;
+			}else{
+				enviro.move(currentLocation);
+			}
+		}
+		
+		
+		//System.out.println(enviro.toString());
+		
+		
 	}
 
 }
