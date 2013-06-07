@@ -74,23 +74,35 @@ public class Graph {
 		}
 		
 		Double value = val.first(); //returns the smallest double
+		Double max = val.last(); //returns the largest double value
 		
 		//Return the corresponding key
 		Node nextStep = getKeyfromVal(index , nodes.get(index).neighbors , value);
 		
-		
+		int newIndex = 0;
 		if(nextStep == null){
 			System.out.println("Step Unsuccessful"); //Big Problem!
 		}else{ 
-			int newIndex = nodes.indexOf(nextStep);
+			newIndex = nodes.indexOf(nextStep);
 			nodes.get(index).setHere(false);
 			nodes.get(newIndex).setHere(true); //Moves the Agent
 			
-
 			System.out.print("Agent Moved from Here " + nodes.get(index).toString());
 			System.out.println(" to Here" + nodes.get(newIndex).toString());
+			
+			Double qval = this.updateQVal(value, max);
+			nodes.get(index).neighbors.put(nextStep, qval);
+			System.out.println(nextStep + " :: " + value + " :: " + max);
+			System.out.println(nextStep + " :: " + qval);
 		}
 		
+		
+	}
+	
+	private Double updateQVal(Double qOld, Double qMax){
+		
+		Double qNew = qOld + 0.99 * (-1 + 0.95 * (qMax - qOld));
+		return qNew;
 	}
 	
 	private Node getKeyfromVal(int index, Map<Node,Double> map, Double value){
