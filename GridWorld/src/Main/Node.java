@@ -64,8 +64,7 @@ public class Node {
 		
 		String nodeInfo = new String();
 		
-		nodeInfo += "The current state you are at is " + this.name ;
-		
+		nodeInfo += "The current state you are at is " + this.name;
 		
 		return nodeInfo;
 	}
