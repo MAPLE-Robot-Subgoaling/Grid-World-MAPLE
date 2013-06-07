@@ -19,7 +19,7 @@ public class Driver {
 		 */
 		
 		Graph enviro = new Graph();
-		enviro.move(1);
+		enviro.move(0);
 
 		/*
 		 * Step two:
