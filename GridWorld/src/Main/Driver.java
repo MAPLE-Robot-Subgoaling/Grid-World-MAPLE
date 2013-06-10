@@ -20,31 +20,8 @@ public class Driver {
 		
 		Graph enviro = new Graph();
 		
-
-		/*
-		 * Step two:
-		 * 	for int i = 0 -> 100 (episodes/trials) ----------->
-		 * 
-		 * 		find the agent - searches the graph for the agent, returns the state/node/index
-		 * 		--store in a temp node?--
-		 * 
-		 * 		check to see if agent is at the goal state
-		 * 		graph calls isWinner() (takes in a state/node/index)
-		 * 			true? - toString(), end of trial
-		 * 			false? - 
-		 * 				do
-		 * 					call Graph.move() passes in the node/index/state
-		 * 					findAgent() - agent index
-		 * 					check isWinner() - do they match?
-		 * 						if true: print, break
-		 * 						if false: continue
-		 * 				while isAgent && isGoal != true
-		 *
-		 *	<-------------				
-		 */
-		
-		for(int i = 1; i < 3; i++){
-			for(int j = 0; j < 10; j++){
+		for(int i = 1; i < 3; i++){ //records trials
+			for(int j = 0; j < 10; j++){ //possible number of steps he can take
 				int currentLocation = enviro.findAgent();
 				if(enviro.isWinner(currentLocation)){
 					System.out.println("Simulation Over");
@@ -57,10 +34,7 @@ public class Driver {
 			
 			System.out.println("--------Simulation Reset: Round " + i + " Complete---------");
 			enviro.resetSim();
-			
 		}
-		
-		
 		
 	}
 

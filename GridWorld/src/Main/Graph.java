@@ -97,6 +97,7 @@ public class Graph {
 			
 			Double qval = this.updateQVal(value, max);
 			nodes.get(index).neighbors.put(nextStep, qval);
+			nodes.get(newIndex).neighbors.put(temp, qval);
 			System.out.println(nextStep + " :: " + value + " :: " + max);
 			System.out.println(nextStep + " :: " + qval);
 		}

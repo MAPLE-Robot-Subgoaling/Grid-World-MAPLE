@@ -19,6 +19,7 @@ public class Node {
 	private String name;
 	private boolean isHere;
 	private boolean isGoal;
+	private boolean isVisited;
 
 	//Constructor: initializes a node and the variables isHere and isGoal to false
 	public Node(String name){
@@ -26,6 +27,7 @@ public class Node {
 		this.name = name;
 		isHere = false;
 		isGoal = false;
+		isVisited = false;
 		neighbors = new HashMap<Node, Double>();
 	}
 	
@@ -43,6 +45,14 @@ public class Node {
 
 	public boolean isHere() {
 		return isHere;
+	}
+	
+	public boolean isVisited(){
+		return isVisited;
+	}
+	
+	public void visiting(boolean isVisited){
+		this.isVisited = isVisited;
 	}
 
 	public void setHere(boolean isHere) {
