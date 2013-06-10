@@ -88,7 +88,7 @@ public class Graph {
 		}
 		
 		if(val.size() == 0){
-			System.out.println("Stuck at " + nodes.get(index).toString());
+			System.out.println("Stuck at " + nodes.get(index).toString() + "\n");
 		}else{
 			Double value = val.first(); //returns the smallest double
 			Double max = val.last(); //returns the largest double value
