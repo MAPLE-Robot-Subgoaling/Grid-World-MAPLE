@@ -45,7 +45,8 @@ public class Graph {
 		//sets up the start state and the goal state 
 		nodes.get(0).setHere(true);
 		nodes.get(nodes.size() - 1).setGoal(true);
-		setNeighbors();
+		//setNeighbors();
+		setNeighborsRandom();
 		
 	}
 	
@@ -86,42 +87,46 @@ public class Graph {
 			}
 		}
 		
-		Double value = val.first(); //returns the smallest double
-		Double max = val.last(); //returns the largest double value
-		
-		//Return the corresponding key
-		Node nextStep = getKeyfromVal(index , nodes.get(index).neighbors , value);
-		
-		int newIndex = 0;
-		if(nextStep == null){
-			System.out.println("Step Unsuccessful"); //Big Problem (Never suppose to happen)!
-		}else{ 
-			newIndex = nodes.indexOf(nextStep);
-			nodes.get(index).setHere(false);
-			nodes.get(newIndex).setHere(true); //Moves the Agent
-			nodes.get(index).visiting(true); //marks the location the agent has been to
+		if(val.size() == 0){
+			System.out.println("Stuck at " + nodes.get(index).toString());
+		}else{
+			Double value = val.first(); //returns the smallest double
+			Double max = val.last(); //returns the largest double value
 			
-			System.out.print("Agent Moved from Here " + nodes.get(index).toString());
-			System.out.println(" to Here " + nodes.get(newIndex).toString());
+			//Return the corresponding key
+			Node nextStep = getKeyfromVal(index , nodes.get(index).neighbors , value);
 			
-			//Updates the Q-values for the learning algorithm 
-			Double qval = this.updateQVal(value, max);
-			nodes.get(index).neighbors.put(nextStep, qval);
-			nodes.get(newIndex).neighbors.put(temp, qval);
-			//System.out.println("Node Chosen: " + nextStep + "\tOld Q-Value: " + value + "\tMax Q-Neighbor-Value: " + max + "\tNew Q-Value" + qval);
-			
-			System.out.print("Node Chosen: " + nextStep + "\t");
-			
-			System.out.print("\tOld Q-Value: ");
-			System.out.printf("%.3f", value);
-			
-			System.out.print("\tMax Q-Neighbor-Value: ");
-			System.out.printf("%.3f", max);
-			
-			System.out.print("\tNew Q-Value: ");
-			System.out.printf("%.3f%n", qval);
-			System.out.println();
-			
+			int newIndex = 0;
+			if(nextStep == null){
+				System.out.println("Step Unsuccessful"); //Big Problem (Never suppose to happen)!
+			}else{ 
+				newIndex = nodes.indexOf(nextStep);
+				nodes.get(index).setHere(false);
+				nodes.get(newIndex).setHere(true); //Moves the Agent
+				nodes.get(index).visiting(true); //marks the location the agent has been to
+				
+				System.out.print("Agent Moved from Here " + nodes.get(index).toString());
+				System.out.println(" to Here " + nodes.get(newIndex).toString());
+				
+				//Updates the Q-values for the learning algorithm 
+				Double qval = this.updateQVal(value, max);
+				nodes.get(index).neighbors.put(nextStep, qval);
+				nodes.get(newIndex).neighbors.put(temp, qval);
+				//System.out.println("Node Chosen: " + nextStep + "\tOld Q-Value: " + value + "\tMax Q-Neighbor-Value: " + max + "\tNew Q-Value" + qval);
+				
+				System.out.print("Node Chosen: " + nextStep + "\t");
+				
+				System.out.print("\tOld Q-Value: ");
+				System.out.printf("%.3f", value);
+				
+				System.out.print("\tMax Q-Neighbor-Value: ");
+				System.out.printf("%.3f", max);
+				
+				System.out.print("\tNew Q-Value: ");
+				System.out.printf("%.3f%n", qval);
+				System.out.println();
+				
+			}
 		}
 		
 		
@@ -146,17 +151,7 @@ public class Graph {
 		return null;
 	}
 	
-	/**
-	 * setNeighbors() - sets up the neighborhood of all the
-	 * node elements
-	 */
 	private void setNeighbors(){
-		/*
-		 * 	for each node in nodes
-		 * 		add HashMap entries of neighboring Nodes and their corresponding Q-Values
-		 * 			note: could add random number generator for the random numbers.
-		 */
-
 		nodes.get(0).neighbors.put(nodes.get(1), 3.0);
 		nodes.get(0).neighbors.put(nodes.get(3), 1.0);
 		nodes.get(1).neighbors.put(nodes.get(0), 3.0);
@@ -181,6 +176,56 @@ public class Graph {
 		nodes.get(7).neighbors.put(nodes.get(8), 0.7);
 		nodes.get(8).neighbors.put(nodes.get(5), 10.0);
 		nodes.get(8).neighbors.put(nodes.get(7), 0.7);
+	}
+	
+	/**
+	 * setNeighbors() - sets up the neighborhood of all the
+	 * node elements
+	 */
+	private void setNeighborsRandom(){
+		/*
+		 * 	for each node in nodes
+		 * 		add HashMap entries of neighboring Nodes and their corresponding Q-Values
+		 * 			note: could add random number generator for the random numbers.
+		 */
+		
+		Double s0s3 = Math.random() * 12;
+		Double s0s1 = Math.random() * 12;
+		Double s3s4 = Math.random() * 12;
+		Double s1s4 = Math.random() * 12;
+		Double s1s2 = Math.random() * 12;
+		Double s4s5 = Math.random() * 12;
+		Double s2s5 = Math.random() * 12;
+		Double s3s6 = Math.random() * 12;
+		Double s4s7 = Math.random() * 12;
+		Double s6s7 = Math.random() * 12;
+		Double s7s8 = Math.random() * 12;
+		Double s5s8 = Math.random() * 12;
+
+		nodes.get(0).neighbors.put(nodes.get(1), s0s1);
+		nodes.get(0).neighbors.put(nodes.get(3), s0s3);
+		nodes.get(1).neighbors.put(nodes.get(0), s0s1);
+		nodes.get(1).neighbors.put(nodes.get(2), s1s2);
+		nodes.get(1).neighbors.put(nodes.get(4), s1s4);
+		nodes.get(2).neighbors.put(nodes.get(1), s1s2);
+		nodes.get(2).neighbors.put(nodes.get(5), s2s5);
+		nodes.get(3).neighbors.put(nodes.get(0), s0s3);
+		nodes.get(3).neighbors.put(nodes.get(4), s3s4);
+		nodes.get(3).neighbors.put(nodes.get(6), s3s6);
+		nodes.get(4).neighbors.put(nodes.get(1), s1s4);
+		nodes.get(4).neighbors.put(nodes.get(3), s3s4);
+		nodes.get(4).neighbors.put(nodes.get(5), s4s5);
+		nodes.get(4).neighbors.put(nodes.get(7), s4s7);
+		nodes.get(5).neighbors.put(nodes.get(2), s2s5);
+		nodes.get(5).neighbors.put(nodes.get(4), s4s5);
+		nodes.get(5).neighbors.put(nodes.get(8), s5s8);
+		nodes.get(6).neighbors.put(nodes.get(3), s3s6);
+		nodes.get(6).neighbors.put(nodes.get(7), s6s7);
+		nodes.get(7).neighbors.put(nodes.get(4), s4s7);
+		nodes.get(7).neighbors.put(nodes.get(6), s6s7);
+		nodes.get(7).neighbors.put(nodes.get(8), s7s8);
+		nodes.get(8).neighbors.put(nodes.get(5), s5s8);
+		nodes.get(8).neighbors.put(nodes.get(7), s7s8);
 	}
 	
 	/**
@@ -225,4 +270,5 @@ public class Graph {
 	public String printNode(int index){
 		return nodes.get(index).toString();
 	}
+	
 }

@@ -17,7 +17,7 @@ public class Driver {
 		Graph enviro = new Graph();
 		
 		
-		for(int i = 1; i < 11; i++){ //records trials
+		for(int i = 1; i <= 3; i++){ //records trials
 			for(int j = 0; j < 10; j++){ //possible number of steps he can take
 				int currentLocation = enviro.findAgent();
 				if(enviro.isWinner(currentLocation)){ //End the Episode - the Agent found the goal.
