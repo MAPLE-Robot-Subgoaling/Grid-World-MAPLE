@@ -15,7 +15,7 @@ public class Driver {
 		
 		//Create a Graph Object
 		Graph enviro = new Graph();
-		
+		System.out.println(enviro.printNodeAttributes());
 		
 		for(int i = 1; i <= 100; i++){ //records trials
 			for(int j = 0; j < 10; j++){ //possible number of steps he can take
@@ -32,6 +32,8 @@ public class Driver {
 			System.out.println("--Simulation Reset: Round " + i + " Complete--\n");
 			enviro.resetSim(); //begin the next episode
 		}
+		
+		System.out.println(enviro.printNodeAttributes());
 		
 	}
 

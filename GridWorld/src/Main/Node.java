@@ -72,16 +72,24 @@ public class Node {
 	 * toString() - returns the toString of the entire Graph
 	 * @return - tostring of the entire graph
 	 */
-	public String toString(){
+	public String toString(){		
+		return name;
+	}
+	
+	public String printNode(){
 		StringBuilder str = new StringBuilder();
 		
-		str.append(name);
-		//str.append("Goal State: " + isGoal() + "\n");
-		//str.append("Agent State: " + isHere() + "\n");
-		//str.append("Neighbor \tQ-Value\n");
+		str.append(name + "\n");
+		str.append("Goal State: " + isGoal() + "\n");
+		str.append("Agent State: " + isHere() + "\n");
+		str.append("Neighbor \tQ-Value\n");
 		
 		
-		return name;
+		for(Entry<Node, Double> entry: this.neighbors.entrySet()){
+			str.append("\t" +entry.getKey().toString() + "\t" + entry.getValue().toString() + "\n");
+		}
+
+		return str.toString();
 	}
 	
 }

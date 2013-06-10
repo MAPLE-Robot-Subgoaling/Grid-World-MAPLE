@@ -45,6 +45,7 @@ public class Graph {
 		//sets up the start state and the goal state 
 		nodes.get(0).setHere(true);
 		nodes.get(nodes.size() - 1).setGoal(true);
+		
 		//setNeighbors();
 		setNeighborsRandom();
 		
@@ -87,9 +88,9 @@ public class Graph {
 			}
 		}
 		
-		if(val.size() == 0){
+		if(val.size() == 0){//No more nodes
 			System.out.println("Stuck at " + nodes.get(index).toString() + "\n");
-		}else{
+		}else{//An available node to move to
 			Double value = val.first(); //returns the smallest double
 			Double max = val.last(); //returns the largest double value
 			
@@ -105,14 +106,12 @@ public class Graph {
 				nodes.get(newIndex).setHere(true); //Moves the Agent
 				nodes.get(index).visiting(true); //marks the location the agent has been to
 				
-				System.out.print("Agent Moved from Here " + nodes.get(index).toString());
-				System.out.println(" to Here " + nodes.get(newIndex).toString());
+				System.out.print("Agent Moved from Here " + nodes.get(index).toString() + " to Here " + nodes.get(newIndex).toString());
 				
 				//Updates the Q-values for the learning algorithm 
 				Double qval = this.updateQVal(value, max);
 				nodes.get(index).neighbors.put(nextStep, qval);
 				nodes.get(newIndex).neighbors.put(temp, qval);
-				//System.out.println("Node Chosen: " + nextStep + "\tOld Q-Value: " + value + "\tMax Q-Neighbor-Value: " + max + "\tNew Q-Value" + qval);
 				
 				System.out.print("Node Chosen: " + nextStep + "\t");
 				
@@ -132,18 +131,11 @@ public class Graph {
 		
 	}
 	
-	private Double updateQVal(Double qOld, Double qMax){
-		
-		Double qNew = qOld + 0.99 * (-1 + 0.95 * (qMax - qOld));
-		return qNew;
+	private Double updateQVal(Double qOld, Double qMax){	
+		return qOld + 0.99 * (-1 + 0.95 * (qMax - qOld));
 	}
 	
 	private Node getKeyfromVal(int index, Map<Node,Double> map, Double value){
-		
-		/*
-		 * Error - returns null here for some reason.
-		 */
-		
 		for(Entry<Node, Double> entry: nodes.get(index).neighbors.entrySet()){
 			if(value.equals(entry.getValue()))
 				return entry.getKey();
@@ -269,6 +261,16 @@ public class Graph {
 	 */
 	public String printNode(int index){
 		return nodes.get(index).toString();
+	}
+	
+	public String printNodeAttributes(){
+		StringBuilder str = new StringBuilder();
+		
+			for(int i = 0; i < nodes.size(); i++){
+				str.append(nodes.get(i).printNode());
+			}
+			
+			return str.toString();
 	}
 	
 }
