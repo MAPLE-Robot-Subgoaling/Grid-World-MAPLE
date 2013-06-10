@@ -15,7 +15,8 @@ import java.util.Map.Entry;
 
 public class Node {
 	
-	protected HashMap<Node, Double> neighbors;
+	//Attributes of the class
+	protected HashMap<Node, Double> neighbors; 
 	private String name;
 	private boolean isHere;
 	private boolean isGoal;

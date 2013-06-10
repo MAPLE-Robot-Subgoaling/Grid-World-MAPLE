@@ -18,12 +18,11 @@ public class Graph {
 	
 	private ArrayList<Node> nodes = new ArrayList<Node>();
 	
+	/**
+	 * Creates the Graph Node Application
+	 */
 	public Graph(){
-		/*
-		 * 9 different nodes - hand coded?
-		 * call setNeighbors()
-		 * Add the nodes to the array list
-		 */
+		
 		Node s0 = new Node("s0");
 		nodes.add(s0);
 		Node s1 = new Node("s1");
@@ -50,9 +49,16 @@ public class Graph {
 		
 	}
 	
+	/**
+	 * Prepares the Environment for the next Simulation
+	 */
 	public void resetSim(){
 		nodes.get(0).setHere(true);
 		nodes.get(nodes.size() - 1).setGoal(true);
+		
+		for(Node n: nodes){
+			n.visiting(false);
+		}
 	}
 	
 	/**
@@ -69,13 +75,15 @@ public class Graph {
 		
 		nodes.get(index).neighbors.entrySet();
 		Node temp = nodes.get(index);
-		TreeSet<Double> val = new TreeSet<Double>(); //Sorts them automatically :)
+		TreeSet<Double> val = new TreeSet<Double>(); //Sorts them automatically
 		
 		//Creates the list of values for that node
 		Iterator<Entry<Node, Double>> itr = nodes.get(index).neighbors.entrySet().iterator();
 		while(itr.hasNext()){
 			Map.Entry<Node, Double> pairs = (Map.Entry<Node, Double>)itr.next();
-			val.add(pairs.getValue());
+			if(pairs.getKey().isVisited() != true){ //checks to see if the agent has visited that node
+				val.add(pairs.getValue());
+			}
 		}
 		
 		Double value = val.first(); //returns the smallest double
@@ -86,20 +94,34 @@ public class Graph {
 		
 		int newIndex = 0;
 		if(nextStep == null){
-			System.out.println("Step Unsuccessful"); //Big Problem!
+			System.out.println("Step Unsuccessful"); //Big Problem (Never suppose to happen)!
 		}else{ 
 			newIndex = nodes.indexOf(nextStep);
 			nodes.get(index).setHere(false);
 			nodes.get(newIndex).setHere(true); //Moves the Agent
+			nodes.get(index).visiting(true); //marks the location the agent has been to
 			
 			System.out.print("Agent Moved from Here " + nodes.get(index).toString());
 			System.out.println(" to Here " + nodes.get(newIndex).toString());
 			
+			//Updates the Q-values for the learning algorithm 
 			Double qval = this.updateQVal(value, max);
 			nodes.get(index).neighbors.put(nextStep, qval);
 			nodes.get(newIndex).neighbors.put(temp, qval);
-			System.out.println(nextStep + " :: " + value + " :: " + max);
-			System.out.println(nextStep + " :: " + qval);
+			//System.out.println("Node Chosen: " + nextStep + "\tOld Q-Value: " + value + "\tMax Q-Neighbor-Value: " + max + "\tNew Q-Value" + qval);
+			
+			System.out.print("Node Chosen: " + nextStep + "\t");
+			
+			System.out.print("\tOld Q-Value: ");
+			System.out.printf("%.3f", value);
+			
+			System.out.print("\tMax Q-Neighbor-Value: ");
+			System.out.printf("%.3f", max);
+			
+			System.out.print("\tNew Q-Value: ");
+			System.out.printf("%.3f%n", qval);
+			System.out.println();
+			
 		}
 		
 		
