@@ -23,6 +23,7 @@ public class Graph {
 	 */
 	public Graph(){
 		
+		//Creates the nodes and their
 		Node s0 = new Node("s0");
 		nodes.add(s0);
 		Node s1 = new Node("s1");
@@ -46,13 +47,18 @@ public class Graph {
 		nodes.get(0).setHere(true);
 		nodes.get(nodes.size() - 1).setGoal(true);
 		
-		//setNeighbors();
-		setNeighborsRandom();
+		//Create the relationship of the node
+		
+		//Randomly choosing which one to run
+		if((Math.random() * 10) < 5)
+			setNeighbors();
+		else
+			setNeighborsRandom();
 		
 	}
 	
 	/**
-	 * Prepares the Environment for the next Simulation
+	 * resetSim() - Prepares the Environment for the next Simulation
 	 */
 	public void resetSim(){
 		nodes.get(0).setHere(true);
@@ -66,6 +72,8 @@ public class Graph {
 	/**
 	 * move() - Moves the agent from one state to the next
 	 * by simply collecting the state from each of the it
+	 * @param index - checks for the index of the node
+	 * @return none
 	 */
 	public void move(int index){
 		/*
@@ -84,11 +92,11 @@ public class Graph {
 		while(itr.hasNext()){
 			Map.Entry<Node, Double> pairs = (Map.Entry<Node, Double>)itr.next();
 			if(pairs.getKey().isVisited() != true){ //checks to see if the agent has visited that node
-				val.add(pairs.getValue());
+				val.add(pairs.getValue()); //adds available node values
 			}
 		}
 		
-		if(val.size() == 0){//No more nodes
+		if(val.size() == 0){//No more nodes to go to
 			System.out.println("Stuck at " + nodes.get(index).toString() + "\n");
 		}else{//An available node to move to
 			Double value = val.first(); //returns the smallest double
@@ -101,11 +109,13 @@ public class Graph {
 			if(nextStep == null){
 				System.out.println("Step Unsuccessful"); //Big Problem (Never suppose to happen)!
 			}else{ 
+				//Makes the move
 				newIndex = nodes.indexOf(nextStep);
 				nodes.get(index).setHere(false);
 				nodes.get(newIndex).setHere(true); //Moves the Agent
 				nodes.get(index).visiting(true); //marks the location the agent has been to
 				
+				//Prints the transisiton
 				System.out.print("Agent Moved from Here " + nodes.get(index).toString() + " to Here " + nodes.get(newIndex).toString());
 				
 				//Updates the Q-values for the learning algorithm 
@@ -113,6 +123,7 @@ public class Graph {
 				nodes.get(index).neighbors.put(nextStep, qval);
 				nodes.get(newIndex).neighbors.put(temp, qval);
 				
+				//Prints the result
 				System.out.print("Node Chosen: " + nextStep + "\t");
 				
 				System.out.print("\tOld Q-Value: ");
@@ -131,10 +142,23 @@ public class Graph {
 		
 	}
 	
+	/**
+	 * updateQVal() - changes the QVal according the the learning equation
+	 * @param qOld - the older QValue
+	 * @param qMax - the Max QValue in the set of all possible next states
+	 * @return - the updated QValue
+	 */
 	private Double updateQVal(Double qOld, Double qMax){	
 		return qOld + 0.99 * (-1 + 0.95 * (qMax - qOld));
 	}
 	
+	/**
+	 * getKeyfromVal() - find the corresponding key value from the value passed in
+	 * @param index - index of the node
+	 * @param map - the entire HashMap passed in from the index
+	 * @param value - the value we are looking for
+	 * @return - the corresponding neighbor key
+	 */
 	private Node getKeyfromVal(int index, Map<Node,Double> map, Double value){
 		for(Entry<Node, Double> entry: nodes.get(index).neighbors.entrySet()){
 			if(value.equals(entry.getValue()))
@@ -143,36 +167,51 @@ public class Graph {
 		return null;
 	}
 	
+	/**
+	 * setNeighbors() - sets up the neighborhood of all the
+	 * node elements
+	 */
 	private void setNeighbors(){
+		
+		System.out.println("Creating relation according to predefined optimal path");
+		
 		nodes.get(0).neighbors.put(nodes.get(1), 3.0);
 		nodes.get(0).neighbors.put(nodes.get(3), 1.0);
+		
 		nodes.get(1).neighbors.put(nodes.get(0), 3.0);
 		nodes.get(1).neighbors.put(nodes.get(2), 7.0);
 		nodes.get(1).neighbors.put(nodes.get(4), 5.0);
+		
 		nodes.get(2).neighbors.put(nodes.get(1), 7.0);
 		nodes.get(2).neighbors.put(nodes.get(5), 6.0);
+		
 		nodes.get(3).neighbors.put(nodes.get(0), 1.0);
 		nodes.get(3).neighbors.put(nodes.get(4), 8.0);
 		nodes.get(3).neighbors.put(nodes.get(6), 0.9);
+		
 		nodes.get(4).neighbors.put(nodes.get(1), 5.0);
 		nodes.get(4).neighbors.put(nodes.get(3), 8.0);
 		nodes.get(4).neighbors.put(nodes.get(5), 7.0);
 		nodes.get(4).neighbors.put(nodes.get(7), 6.0);
+		
 		nodes.get(5).neighbors.put(nodes.get(2), 6.0);
 		nodes.get(5).neighbors.put(nodes.get(4), 7.0);
 		nodes.get(5).neighbors.put(nodes.get(8), 10.0);
+		
 		nodes.get(6).neighbors.put(nodes.get(3), 0.9);
 		nodes.get(6).neighbors.put(nodes.get(7), 0.8);
+		
 		nodes.get(7).neighbors.put(nodes.get(4), 6.0);
 		nodes.get(7).neighbors.put(nodes.get(6), 0.8);
 		nodes.get(7).neighbors.put(nodes.get(8), 0.7);
+		
 		nodes.get(8).neighbors.put(nodes.get(5), 10.0);
 		nodes.get(8).neighbors.put(nodes.get(7), 0.7);
 	}
 	
 	/**
-	 * setNeighbors() - sets up the neighborhood of all the
-	 * node elements
+	 * setNeighborsRandom() - sets up the neighborhood of all the
+	 * node elements, but with Random Numbers
 	 */
 	private void setNeighborsRandom(){
 		/*
@@ -180,6 +219,8 @@ public class Graph {
 		 * 		add HashMap entries of neighboring Nodes and their corresponding Q-Values
 		 * 			note: could add random number generator for the random numbers.
 		 */
+		
+		System.out.println("Creating relations according to randomized numbers");
 		
 		Double s0s3 = Math.random() * 12;
 		Double s0s1 = Math.random() * 12;
@@ -196,26 +237,34 @@ public class Graph {
 
 		nodes.get(0).neighbors.put(nodes.get(1), s0s1);
 		nodes.get(0).neighbors.put(nodes.get(3), s0s3);
+		
 		nodes.get(1).neighbors.put(nodes.get(0), s0s1);
 		nodes.get(1).neighbors.put(nodes.get(2), s1s2);
 		nodes.get(1).neighbors.put(nodes.get(4), s1s4);
+		
 		nodes.get(2).neighbors.put(nodes.get(1), s1s2);
 		nodes.get(2).neighbors.put(nodes.get(5), s2s5);
+		
 		nodes.get(3).neighbors.put(nodes.get(0), s0s3);
 		nodes.get(3).neighbors.put(nodes.get(4), s3s4);
 		nodes.get(3).neighbors.put(nodes.get(6), s3s6);
+		
 		nodes.get(4).neighbors.put(nodes.get(1), s1s4);
 		nodes.get(4).neighbors.put(nodes.get(3), s3s4);
 		nodes.get(4).neighbors.put(nodes.get(5), s4s5);
 		nodes.get(4).neighbors.put(nodes.get(7), s4s7);
+		
 		nodes.get(5).neighbors.put(nodes.get(2), s2s5);
 		nodes.get(5).neighbors.put(nodes.get(4), s4s5);
 		nodes.get(5).neighbors.put(nodes.get(8), s5s8);
+		
 		nodes.get(6).neighbors.put(nodes.get(3), s3s6);
 		nodes.get(6).neighbors.put(nodes.get(7), s6s7);
+		
 		nodes.get(7).neighbors.put(nodes.get(4), s4s7);
 		nodes.get(7).neighbors.put(nodes.get(6), s6s7);
 		nodes.get(7).neighbors.put(nodes.get(8), s7s8);
+		
 		nodes.get(8).neighbors.put(nodes.get(5), s5s8);
 		nodes.get(8).neighbors.put(nodes.get(7), s7s8);
 	}
@@ -247,10 +296,8 @@ public class Graph {
 	 */
 	public String toString(){
 		StringBuilder str = new StringBuilder();
-		
 		for(int i = 0; i < nodes.size(); i++)
 			str.append(printNode(i));
-		
 		return str.toString();
 	}
 	
@@ -265,12 +312,9 @@ public class Graph {
 	
 	public String printNodeAttributes(){
 		StringBuilder str = new StringBuilder();
-		
-			for(int i = 0; i < nodes.size(); i++){
-				str.append(nodes.get(i).printNode());
-			}
-			
-			return str.toString();
+		for(int i = 0; i < nodes.size(); i++)
+			str.append(nodes.get(i).printNode());
+		return str.toString();
 	}
 	
 }
