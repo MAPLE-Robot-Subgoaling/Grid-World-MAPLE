@@ -42,19 +42,24 @@ public class Driver {
 		 *
 		 *	<-------------				
 		 */
-		for(int i = 0; i < 10; i++){
-			int currentLocation = enviro.findAgent();
-			if(enviro.isWinner(currentLocation)){
-				System.out.println("Simulation Over");
-				System.out.println("Agent Located at: " + enviro.printNode(currentLocation));
-				break;
-			}else{
-				enviro.move(currentLocation);
+		
+		for(int i = 1; i < 3; i++){
+			for(int j = 0; j < 10; j++){
+				int currentLocation = enviro.findAgent();
+				if(enviro.isWinner(currentLocation)){
+					System.out.println("Simulation Over");
+					System.out.println("Agent Located at: " + enviro.printNode(currentLocation));
+					break;
+				}else{
+					enviro.move(currentLocation);
+				}
 			}
+			
+			System.out.println("--------Simulation Reset: Round " + i + " Complete---------");
+			enviro.resetSim();
+			
 		}
 		
-		
-		//System.out.println(enviro.toString());
 		
 		
 	}

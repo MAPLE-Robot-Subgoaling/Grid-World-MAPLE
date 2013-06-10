@@ -50,6 +50,11 @@ public class Graph {
 		
 	}
 	
+	public void resetSim(){
+		nodes.get(0).setHere(true);
+		nodes.get(nodes.size() - 1).setGoal(true);
+	}
+	
 	/**
 	 * move() - Moves the agent from one state to the next
 	 * by simply collecting the state from each of the it
@@ -88,7 +93,7 @@ public class Graph {
 			nodes.get(newIndex).setHere(true); //Moves the Agent
 			
 			System.out.print("Agent Moved from Here " + nodes.get(index).toString());
-			System.out.println(" to Here" + nodes.get(newIndex).toString());
+			System.out.println(" to Here " + nodes.get(newIndex).toString());
 			
 			Double qval = this.updateQVal(value, max);
 			nodes.get(index).neighbors.put(nextStep, qval);

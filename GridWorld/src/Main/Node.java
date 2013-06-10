@@ -1,6 +1,7 @@
 package Main;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * 
@@ -61,6 +62,13 @@ public class Node {
 	 * @return - tostring of the entire graph
 	 */
 	public String toString(){
+		StringBuilder str = new StringBuilder();
+		
+		str.append(name);
+		//str.append("Goal State: " + isGoal() + "\n");
+		//str.append("Agent State: " + isHere() + "\n");
+		//str.append("Neighbor \tQ-Value\n");
+		
 		
 		return name;
 	}
