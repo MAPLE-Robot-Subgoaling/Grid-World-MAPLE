@@ -78,12 +78,6 @@ public class Graph {
 	 * @return none
 	 */
 	public void move(int index){
-		/*
-		 * access the node on the hashmap
-		 * looks for the smallest value in the map (behavior) - collects the node's index/state
-		 * sets the agent to false in old node, and true in the new node
-		 * print out the node
-		 */
 		
 		nodes.get(index).neighbors.entrySet();
 		Node temp = nodes.get(index);
