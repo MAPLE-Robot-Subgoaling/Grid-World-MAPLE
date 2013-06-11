@@ -46,14 +46,16 @@ public class Graph {
 		//sets up the start state and the goal state 
 		nodes.get(0).setHere(true);
 		nodes.get(nodes.size() - 1).setGoal(true);
+	}
+	
+	public void chooseScenario(int num){
+
+		switch(num){
+			case 1: setNeighbors();
+			case 2: setNeighborsRandom();
+			case 3: this.setNeighborsMatch();
+		}
 		
-		//Create the relationship of the node
-		
-		//Randomly choosing which one to run
-		if((Math.random() * 10) < 5)
-			setNeighbors();
-		else
-			setNeighborsRandom();
 		
 	}
 	
@@ -116,7 +118,7 @@ public class Graph {
 				nodes.get(index).visiting(true); //marks the location the agent has been to
 				
 				//Prints the transisiton
-				System.out.print("Agent Moved from Here " + nodes.get(index).toString() + " to Here " + nodes.get(newIndex).toString());
+				System.out.println("Agent Moved from Here " + nodes.get(index).toString() + " to Here " + nodes.get(newIndex).toString());
 				
 				//Updates the Q-values for the learning algorithm 
 				Double qval = this.updateQVal(value, max);
@@ -173,7 +175,7 @@ public class Graph {
 	 */
 	private void setNeighbors(){
 		
-		System.out.println("Creating relation according to predefined optimal path");
+		System.out.println("Creating relation according to predefined optimal path\n");
 		
 		nodes.get(0).neighbors.put(nodes.get(1), 3.0);
 		nodes.get(0).neighbors.put(nodes.get(3), 1.0);
@@ -220,7 +222,7 @@ public class Graph {
 		 * 			note: could add random number generator for the random numbers.
 		 */
 		
-		System.out.println("Creating relations according to randomized numbers");
+		System.out.println("Creating relations according to randomized numbers\n");
 		
 		Double s0s3 = Math.random() * 12;
 		Double s0s1 = Math.random() * 12;
@@ -267,6 +269,44 @@ public class Graph {
 		
 		nodes.get(8).neighbors.put(nodes.get(5), s5s8);
 		nodes.get(8).neighbors.put(nodes.get(7), s7s8);
+	}
+	
+	private void setNeighborsMatch(){
+		
+		System.out.println("Setting the enivronment based on Q-Values as all 5.0\n");
+		
+		nodes.get(0).neighbors.put(nodes.get(1), 5.0);
+		nodes.get(0).neighbors.put(nodes.get(3), 5.0);
+		
+		nodes.get(1).neighbors.put(nodes.get(0), 5.0);
+		nodes.get(1).neighbors.put(nodes.get(2), 5.0);
+		nodes.get(1).neighbors.put(nodes.get(4), 5.0);
+		
+		nodes.get(2).neighbors.put(nodes.get(1), 5.0);
+		nodes.get(2).neighbors.put(nodes.get(5), 5.0);
+		
+		nodes.get(3).neighbors.put(nodes.get(0), 5.0);
+		nodes.get(3).neighbors.put(nodes.get(4), 5.0);
+		nodes.get(3).neighbors.put(nodes.get(6), 5.);
+		
+		nodes.get(4).neighbors.put(nodes.get(1), 5.0);
+		nodes.get(4).neighbors.put(nodes.get(3), 5.0);
+		nodes.get(4).neighbors.put(nodes.get(5), 5.0);
+		nodes.get(4).neighbors.put(nodes.get(7), 5.0);
+		
+		nodes.get(5).neighbors.put(nodes.get(2), 5.0);
+		nodes.get(5).neighbors.put(nodes.get(4), 5.0);
+		nodes.get(5).neighbors.put(nodes.get(8), 5.0);
+		
+		nodes.get(6).neighbors.put(nodes.get(3), 5.0);
+		nodes.get(6).neighbors.put(nodes.get(7), 5.0);
+		
+		nodes.get(7).neighbors.put(nodes.get(4), 5.0);
+		nodes.get(7).neighbors.put(nodes.get(6), 5.0);
+		nodes.get(7).neighbors.put(nodes.get(8), 5.0);
+		
+		nodes.get(8).neighbors.put(nodes.get(5), 5.0);
+		nodes.get(8).neighbors.put(nodes.get(7), 5.0);
 	}
 	
 	/**
